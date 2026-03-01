@@ -1,0 +1,9 @@
+cluster_id,shelf_capacity_cm,min_facings_core,max_facings_per_sku,brand_cap_rule
+CL01,240,1,4,0.42
+CL02,240,1,4,0.42
+CL03,240,1,4,0.42
+CL04,190,1,4,0.42
+CL05,190,1,4,0.42
+CL06,190,1,4,0.42
+CL07,150,1,4,0.42
+CL08,150,1,4,0.42
