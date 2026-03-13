@@ -6,17 +6,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <style>
           :root {
-            --bg: #07111d;
-            --panel: rgba(9, 19, 31, 0.82);
-            --ink: #edf4fb;
-            --muted: #9fb2c3;
-            --line: rgba(194, 221, 238, 0.12);
+            --bg: #f3eee6;
+            --panel: rgba(255, 251, 246, 0.92);
+            --ink: #21343b;
+            --muted: #63777c;
+            --line: rgba(33, 52, 59, 0.14);
             --teal: #0f7b76;
             --teal-soft: rgba(15, 123, 118, 0.16);
             --danger: #b54441;
             --hybrid: #926a33;
             --hybrid-soft: rgba(146, 106, 51, 0.18);
-            --shadow: 0 42px 120px rgba(0, 0, 0, 0.42);
+            --shadow: 0 28px 90px rgba(58, 50, 42, 0.14);
           }
 
           * {
@@ -27,10 +27,9 @@
             margin: 0;
             font-family: "Avenir Next", "PingFang SC", "Hiragino Sans GB", sans-serif;
             background:
-              radial-gradient(circle at 18% 16%, rgba(75, 207, 255, 0.20), transparent 26%),
-              radial-gradient(circle at 84% 12%, rgba(255, 117, 95, 0.18), transparent 24%),
-              radial-gradient(circle at 50% 78%, rgba(84, 96, 255, 0.14), transparent 36%),
-              linear-gradient(180deg, #081321 0%, #09111d 46%, #050b14 100%);
+              radial-gradient(circle at top left, rgba(15, 123, 118, 0.16), transparent 34%),
+              radial-gradient(circle at 88% 14%, rgba(200, 97, 68, 0.18), transparent 28%),
+              linear-gradient(180deg, #f7f2e9 0%, #efe8dc 100%);
             color: var(--ink);
           }
 
@@ -53,10 +52,8 @@
             gap: 8px;
             padding: 8px 12px;
             border-radius: 999px;
-            background: rgba(11, 23, 37, 0.68);
-            border: 1px solid rgba(134, 190, 220, 0.20);
-            color: #d8ecfb;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(33, 52, 59, 0.08);
             font-size: 12px;
             font-weight: 800;
             letter-spacing: 0.08em;
@@ -67,7 +64,6 @@
             margin: 12px 0 10px;
             font-size: 34px;
             line-height: 1.06;
-            color: #ffffff;
           }
 
           .hero p {
@@ -85,9 +81,8 @@
           .legend-card {
             padding: 14px 16px;
             border-radius: 18px;
-            background: linear-gradient(180deg, rgba(14, 27, 43, 0.88), rgba(8, 18, 30, 0.78));
-            border: 1px solid rgba(175, 215, 238, 0.12);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.68);
+            border: 1px solid rgba(33, 52, 59, 0.08);
           }
 
           .legend-card strong {
@@ -127,7 +122,7 @@
             position: relative;
             overflow: hidden;
             background: var(--panel);
-            border: 1px solid rgba(187, 223, 244, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.52);
             border-radius: 30px;
             box-shadow: var(--shadow);
             backdrop-filter: blur(12px);
@@ -137,10 +132,10 @@
             min-height: 710px;
             padding: 14px 14px 18px;
             background:
-              radial-gradient(circle at 25% 18%, rgba(99, 226, 255, 0.18), transparent 22%),
-              radial-gradient(circle at 76% 16%, rgba(255, 156, 118, 0.14), transparent 24%),
-              radial-gradient(circle at 52% 78%, rgba(74, 96, 255, 0.14), transparent 28%),
-              linear-gradient(180deg, rgba(11, 22, 35, 0.96) 0%, rgba(8, 16, 26, 0.98) 100%);
+              radial-gradient(circle at 22% 18%, rgba(255, 255, 255, 0.78), transparent 28%),
+              radial-gradient(circle at 72% 22%, rgba(255, 214, 200, 0.32), transparent 24%),
+              radial-gradient(circle at 50% 82%, rgba(113, 162, 255, 0.12), transparent 28%),
+              linear-gradient(180deg, rgba(255, 252, 247, 0.98) 0%, rgba(248, 241, 234, 0.96) 100%);
           }
 
           .brain-card::before {
@@ -148,8 +143,8 @@
             position: absolute;
             inset: 0;
             background:
-              linear-gradient(135deg, rgba(255, 255, 255, 0.10), transparent 24%),
-              linear-gradient(220deg, rgba(74, 210, 255, 0.08), transparent 34%);
+              linear-gradient(135deg, rgba(255, 255, 255, 0.44), transparent 24%),
+              linear-gradient(220deg, rgba(15, 123, 118, 0.08), transparent 34%);
             pointer-events: none;
           }
 
@@ -158,7 +153,7 @@
             position: absolute;
             inset: 18px;
             border-radius: 26px;
-            border: 1px solid rgba(170, 215, 241, 0.08);
+            border: 1px solid rgba(194, 210, 224, 0.16);
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
             pointer-events: none;
           }
@@ -176,13 +171,12 @@
             z-index: 5;
             padding: 9px 14px;
             border-radius: 999px;
-            background: rgba(11, 23, 37, 0.72);
-            border: 1px solid rgba(146, 207, 238, 0.18);
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(33, 52, 59, 0.12);
             font-size: 12px;
-            color: #d8ecfb;
+            color: #40535b;
             font-weight: 800;
             letter-spacing: 0.04em;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
           }
 
           .brain-guide {
@@ -194,11 +188,11 @@
             gap: 6px;
             padding: 12px 14px;
             border-radius: 18px;
-            background: rgba(11, 23, 37, 0.72);
-            border: 1px solid rgba(146, 207, 238, 0.16);
-            box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
+            background: rgba(255, 255, 255, 0.86);
+            border: 1px solid rgba(33, 52, 59, 0.10);
+            box-shadow: 0 14px 36px rgba(58, 50, 42, 0.08);
             font-size: 12px;
-            color: #d3e5f4;
+            color: #41555d;
           }
 
           .brain-guide span {
@@ -222,8 +216,8 @@
           }
 
           .guide-outline {
-            background: rgba(12, 22, 34, 0.94);
-            border: 2px solid rgba(214, 188, 168, 0.58);
+            background: rgba(255, 255, 255, 0.94);
+            border: 2px solid rgba(124, 81, 72, 0.42);
           }
 
           svg {
@@ -235,8 +229,9 @@
 
           .cortex-shell {
             fill: url(#cortexGradient);
-            stroke: rgba(255, 221, 205, 0.46);
-            stroke-width: 4.4;
+            stroke: rgba(255, 255, 255, 0.42);
+            stroke-width: 4;
+            opacity: 0.94;
           }
 
           .cortex-rim {
@@ -247,7 +242,7 @@
           }
 
           .cortex-shadow {
-            fill: rgba(172, 114, 95, 0.14);
+            fill: rgba(165, 110, 122, 0.10);
           }
 
           .brain-object {
@@ -256,46 +251,47 @@
 
           .brain-back-glow {
             fill: url(#brainGlowGradient);
-            opacity: 0.88;
+            opacity: 0.56;
           }
 
           .stage-shadow {
-            fill: rgba(3, 10, 18, 0.78);
+            fill: rgba(115, 125, 156, 0.18);
           }
 
           .stage-rim {
             fill: url(#stageGlowGradient);
-            opacity: 0.92;
+            opacity: 0.54;
           }
 
           .shell-highlight {
             fill: url(#shellHighlightGradient);
-            opacity: 0.78;
+            opacity: 0.82;
             mix-blend-mode: screen;
           }
 
           .shell-highlight.soft {
-            opacity: 0.42;
+            opacity: 0.34;
           }
 
           .cortex-inner-shade {
-            fill: rgba(109, 70, 74, 0.10);
+            fill: rgba(125, 81, 98, 0.08);
           }
 
           .white-matter-shadow {
-            fill: rgba(169, 118, 98, 0.10);
+            fill: rgba(168, 123, 132, 0.08);
           }
 
           .white-matter {
             fill: url(#whiteMatterGradient);
-            stroke: rgba(124, 81, 72, 0.22);
-            stroke-width: 3;
+            stroke: rgba(255, 242, 232, 0.46);
+            stroke-width: 2.2;
+            opacity: 0.88;
           }
 
           .corpus-callosum {
             fill: rgba(250, 241, 228, 0.95);
-            stroke: rgba(124, 81, 72, 0.24);
-            stroke-width: 2.6;
+            stroke: rgba(255, 255, 255, 0.34);
+            stroke-width: 2.2;
             filter: url(#subsurfaceSoftGlow);
           }
 
@@ -325,20 +321,20 @@
           }
 
           .deep-structure {
-            fill: rgba(116, 79, 88, 0.30);
-            stroke: rgba(250, 218, 206, 0.18);
+            fill: rgba(141, 96, 124, 0.24);
+            stroke: rgba(255, 231, 221, 0.18);
             stroke-width: 1.8;
           }
 
           .ventricle {
-            fill: rgba(233, 246, 255, 0.92);
+            fill: rgba(241, 250, 255, 0.94);
             stroke: rgba(255, 235, 222, 0.14);
             stroke-width: 1.8;
           }
 
           .hippocampus {
-            fill: rgba(209, 121, 148, 0.22);
-            stroke: rgba(255, 212, 224, 0.18);
+            fill: rgba(220, 138, 174, 0.18);
+            stroke: rgba(255, 220, 233, 0.18);
             stroke-width: 1.8;
           }
 
@@ -358,39 +354,41 @@
 
           .sulcus {
             fill: none;
-            stroke: rgba(125, 73, 84, 0.36);
-            stroke-width: 2.2;
+            stroke: rgba(138, 88, 103, 0.24);
+            stroke-width: 1.9;
             stroke-linecap: round;
             opacity: 0.95;
           }
 
           .sulcus.deep {
-            stroke: rgba(115, 66, 75, 0.44);
-            stroke-width: 3;
+            stroke: rgba(128, 80, 96, 0.30);
+            stroke-width: 2.5;
           }
 
           .sulcus.fine {
-            stroke: rgba(132, 80, 87, 0.22);
-            stroke-width: 1.4;
+            stroke: rgba(148, 101, 114, 0.14);
+            stroke-width: 1.2;
           }
 
           .cerebellum {
             fill: url(#cerebellumGradient);
-            stroke: rgba(249, 221, 206, 0.18);
-            stroke-width: 2.6;
+            stroke: rgba(255, 245, 238, 0.26);
+            stroke-width: 2.2;
+            opacity: 0.92;
           }
 
           .cerebellar-fold {
             fill: none;
-            stroke: rgba(130, 80, 88, 0.28);
-            stroke-width: 1.8;
+            stroke: rgba(145, 92, 108, 0.20);
+            stroke-width: 1.5;
             stroke-linecap: round;
           }
 
           .brainstem {
             fill: url(#stemGradient);
-            stroke: rgba(255, 228, 214, 0.18);
-            stroke-width: 2.4;
+            stroke: rgba(255, 245, 235, 0.22);
+            stroke-width: 2;
+            opacity: 0.88;
           }
 
           .anatomy-line {
@@ -406,13 +404,13 @@
           }
 
           .anatomy-label {
-            fill: #e4f0fa;
+            fill: #475a62;
             font-size: 12px;
             font-weight: 800;
             letter-spacing: 0.02em;
             paint-order: stroke;
-            stroke: rgba(6, 12, 20, 0.84);
-            stroke-width: 5;
+            stroke: rgba(255, 255, 255, 0.96);
+            stroke-width: 6;
             stroke-linejoin: round;
           }
 
@@ -455,14 +453,14 @@
           }
 
           .callout-pill {
-            fill: rgba(6, 15, 24, 0.78);
+            fill: rgba(255, 255, 255, 0.96);
             stroke: var(--accent);
             stroke-width: 2;
-            filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.28));
+            filter: drop-shadow(0 6px 16px rgba(35, 43, 48, 0.10));
           }
 
           .callout-label {
-            fill: #f3fbff;
+            fill: #31454d;
             font-size: 13px;
             font-weight: 800;
             letter-spacing: 0.04em;
@@ -544,12 +542,11 @@
             max-width: 270px;
             padding: 14px 16px;
             border-radius: 20px;
-            background: linear-gradient(180deg, rgba(9, 18, 30, 0.94), rgba(4, 10, 17, 0.96));
+            background: rgba(24, 31, 39, 0.95);
             color: #fff;
             font-size: 13px;
             line-height: 1.5;
-            box-shadow: 0 24px 56px rgba(0, 0, 0, 0.38);
-            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 44px rgba(0, 0, 0, 0.24);
             opacity: 0;
           }
 
@@ -598,9 +595,6 @@
 
           .info-panel {
             padding: 24px;
-            background:
-              radial-gradient(circle at 84% 10%, rgba(84, 215, 255, 0.12), transparent 26%),
-              linear-gradient(180deg, rgba(10, 21, 34, 0.90), rgba(8, 16, 26, 0.94));
           }
 
           .info-label {
@@ -644,8 +638,7 @@
             align-items: center;
             padding: 7px 11px;
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(197, 223, 239, 0.10);
+            background: rgba(33, 52, 59, 0.06);
             color: var(--ink);
             font-size: 12px;
             font-weight: 800;
@@ -676,8 +669,8 @@
             align-items: center;
             padding: 8px 10px;
             border-radius: 14px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(194, 221, 238, 0.10);
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(33, 52, 59, 0.08);
             font-size: 13px;
           }
 
@@ -691,11 +684,11 @@
             margin-top: 16px;
             padding: 14px 18px;
             border-radius: 18px;
-            background: rgba(9, 19, 31, 0.74);
+            background: rgba(255, 255, 255, 0.62);
             color: var(--muted);
             font-size: 13px;
             line-height: 1.64;
-            border: 1px solid rgba(194, 221, 238, 0.10);
+            border: 1px solid rgba(33, 52, 59, 0.08);
           }
 
           @keyframes pulse {
@@ -752,7 +745,7 @@
             <div>
               <div class="eyebrow">Focused Ultrasound Demo</div>
               <h2>点击脑区，查看聚焦超声可能对应的精神科研究方向</h2>
-              <p>这张图现在改成了更像发布会舞台上的 3D 脑切面示意图，默认就能看见主要靶点轮廓、深部结构和中文解剖提示。页面里的“可能治疗”都应理解为“研究中的潜在适应证”。</p>
+              <p>这张图现在重点优化成更精细的悬浮玻璃脑模型，只强化大脑本体的体积感、透明感和结构层次，不再额外改变页面整体表达。页面里的“可能治疗”都应理解为“研究中的潜在适应证”。</p>
             </div>
             <div class="legend">
               <div class="legend-card teal">
@@ -777,7 +770,7 @@
                   <span><i class="guide-chip"></i>彩色半透明区 = 可点击靶点</span>
                   <span><i class="guide-outline"></i>中文文字 = 解剖导视</span>
                 </div>
-                <div class="brain-caption">Keynote-Style 3D Cutaway</div>
+                <div class="brain-caption">Floating Glass Brain Model</div>
                 <div class="popup-shell">
                   <div class="spotlight" id="spotlight"></div>
                   <div class="popup-card" id="popup" data-side="right"></div>
@@ -802,10 +795,10 @@
                       <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 0.96 0 0 0  0 0 0.92 0 0  0 0 0 0.38 0" />
                     </filter>
                     <linearGradient id="cortexGradient" x1="0%" x2="100%" y1="0%" y2="100%">
-                      <stop offset="0%" stop-color="#ffd9cb" />
-                      <stop offset="28%" stop-color="#f7c2b2" />
-                      <stop offset="62%" stop-color="#db8f8a" />
-                      <stop offset="100%" stop-color="#945d66" />
+                      <stop offset="0%" stop-color="#fff3ee" stop-opacity="0.98" />
+                      <stop offset="24%" stop-color="#ffd9ce" stop-opacity="0.92" />
+                      <stop offset="62%" stop-color="#f0b6bb" stop-opacity="0.84" />
+                      <stop offset="100%" stop-color="#be8faa" stop-opacity="0.78" />
                     </linearGradient>
                     <radialGradient id="brainGlowGradient" cx="50%" cy="50%" r="50%">
                       <stop offset="0%" stop-color="#6be2ff" stop-opacity="0.42" />
@@ -818,9 +811,9 @@
                       <stop offset="100%" stop-color="#ffd6c8" stop-opacity="0" />
                     </radialGradient>
                     <radialGradient id="whiteMatterGradient" cx="42%" cy="34%" r="78%">
-                      <stop offset="0%" stop-color="#fffdf8" />
-                      <stop offset="65%" stop-color="#fbf3e7" />
-                      <stop offset="100%" stop-color="#efe0cd" />
+                      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96" />
+                      <stop offset="65%" stop-color="#fff7f1" stop-opacity="0.90" />
+                      <stop offset="100%" stop-color="#efdfe7" stop-opacity="0.76" />
                     </radialGradient>
                     <radialGradient id="stageGlowGradient" cx="50%" cy="50%" r="50%">
                       <stop offset="0%" stop-color="#6fe4ff" stop-opacity="0.58" />
@@ -828,12 +821,12 @@
                       <stop offset="100%" stop-color="#4e84ff" stop-opacity="0" />
                     </radialGradient>
                     <linearGradient id="cerebellumGradient" x1="0%" x2="100%" y1="0%" y2="100%">
-                      <stop offset="0%" stop-color="#f1cbbc" />
-                      <stop offset="100%" stop-color="#9f6772" />
+                      <stop offset="0%" stop-color="#ffe1d6" stop-opacity="0.94" />
+                      <stop offset="100%" stop-color="#bf8da4" stop-opacity="0.76" />
                     </linearGradient>
                     <linearGradient id="stemGradient" x1="0%" x2="0%" y1="0%" y2="100%">
-                      <stop offset="0%" stop-color="#f6ddcf" />
-                      <stop offset="100%" stop-color="#b58d87" />
+                      <stop offset="0%" stop-color="#fff0e4" stop-opacity="0.92" />
+                      <stop offset="100%" stop-color="#ccb0be" stop-opacity="0.74" />
                     </linearGradient>
                   </defs>
                   <ellipse class="stage-shadow" cx="390" cy="504" rx="228" ry="36" filter="url(#stageBlur)" />
