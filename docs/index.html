@@ -221,12 +221,19 @@
             stroke-width: 5;
           }
 
+          .cortex-rim {
+            fill: none;
+            stroke: rgba(255, 244, 236, 0.72);
+            stroke-width: 2.8;
+            stroke-linecap: round;
+          }
+
           .cortex-shadow {
             fill: rgba(172, 114, 95, 0.10);
           }
 
           .white-matter {
-            fill: rgba(255, 251, 244, 0.96);
+            fill: url(#whiteMatterGradient);
             stroke: rgba(124, 81, 72, 0.22);
             stroke-width: 3;
           }
@@ -268,10 +275,61 @@
             stroke-width: 1.8;
           }
 
+          .ventricle {
+            fill: rgba(244, 250, 255, 0.88);
+            stroke: rgba(124, 81, 72, 0.20);
+            stroke-width: 1.8;
+          }
+
+          .hippocampus {
+            fill: rgba(186, 111, 130, 0.18);
+            stroke: rgba(140, 86, 101, 0.34);
+            stroke-width: 1.8;
+          }
+
+          .fiber-bundle {
+            fill: none;
+            stroke: rgba(180, 153, 112, 0.32);
+            stroke-width: 2.2;
+            stroke-linecap: round;
+          }
+
+          .midline-cut {
+            fill: none;
+            stroke: rgba(124, 81, 72, 0.22);
+            stroke-width: 2.4;
+            stroke-dasharray: 5 6;
+          }
+
+          .sulcus {
+            fill: none;
+            stroke: rgba(124, 81, 72, 0.24);
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            opacity: 0.95;
+          }
+
+          .sulcus.deep {
+            stroke: rgba(124, 81, 72, 0.32);
+            stroke-width: 3.2;
+          }
+
+          .sulcus.fine {
+            stroke: rgba(124, 81, 72, 0.16);
+            stroke-width: 1.5;
+          }
+
           .cerebellum {
             fill: url(#cerebellumGradient);
             stroke: rgba(126, 89, 82, 0.44);
             stroke-width: 3;
+          }
+
+          .cerebellar-fold {
+            fill: none;
+            stroke: rgba(126, 89, 82, 0.24);
+            stroke-width: 2;
+            stroke-linecap: round;
           }
 
           .brainstem {
@@ -666,11 +724,22 @@
                 </div>
                 <svg viewBox="0 0 760 560" role="img" aria-label="聚焦超声脑区交互图">
                   <defs>
+                    <clipPath id="brainClip">
+                      <path d="M142 270 C114 196 136 120 210 88 C292 51 414 58 522 104 C614 143 680 219 684 298 C687 363 653 437 570 486 C496 531 364 534 266 503 C207 485 172 479 145 489 C118 500 94 489 83 468 C70 443 77 413 95 381 C112 349 120 313 142 270 Z" />
+                    </clipPath>
+                    <clipPath id="cerebellumClip">
+                      <path d="M510 376 C553 372 589 390 603 428 C616 468 594 506 556 522 C515 540 468 523 450 487 C437 460 442 417 468 394 C480 382 495 377 510 376 Z" />
+                    </clipPath>
                     <linearGradient id="cortexGradient" x1="0%" x2="100%" y1="0%" y2="100%">
                       <stop offset="0%" stop-color="#f2c7b3" />
                       <stop offset="55%" stop-color="#e7b49f" />
                       <stop offset="100%" stop-color="#d89a84" />
                     </linearGradient>
+                    <radialGradient id="whiteMatterGradient" cx="42%" cy="34%" r="78%">
+                      <stop offset="0%" stop-color="#fffdf8" />
+                      <stop offset="65%" stop-color="#fbf3e7" />
+                      <stop offset="100%" stop-color="#efe0cd" />
+                    </radialGradient>
                     <linearGradient id="cerebellumGradient" x1="0%" x2="100%" y1="0%" y2="100%">
                       <stop offset="0%" stop-color="#e7c2b3" />
                       <stop offset="100%" stop-color="#d39a8a" />
@@ -682,20 +751,51 @@
                   </defs>
                   <path class="cortex-shadow" d="M142 270 C116 202 136 132 205 96 C278 58 401 60 505 105 C595 144 661 219 666 292 C670 351 638 424 561 469 C487 512 362 516 275 490 C220 473 180 469 149 478 C121 486 98 474 89 453 C80 433 86 406 99 378 C115 344 116 302 142 270 Z" />
                   <path class="cortex-shell" d="M142 270 C114 196 136 120 210 88 C292 51 414 58 522 104 C614 143 680 219 684 298 C687 363 653 437 570 486 C496 531 364 534 266 503 C207 485 172 479 145 489 C118 500 94 489 83 468 C70 443 77 413 95 381 C112 349 120 313 142 270 Z" />
+                  <path class="cortex-rim" d="M153 260 C131 201 149 136 216 105 C294 68 408 76 506 118 C592 154 649 223 653 292 C656 352 625 414 554 457 C485 498 369 501 286 475" />
+                  <g clip-path="url(#brainClip)">
+                    <path class="sulcus deep" d="M178 176 C215 150 269 136 328 139 C390 141 453 158 507 192" />
+                    <path class="sulcus" d="M168 214 C221 181 299 171 382 179 C452 186 518 207 567 246" />
+                    <path class="sulcus deep" d="M160 258 C232 221 334 213 439 226 C507 235 564 255 608 286" />
+                    <path class="sulcus" d="M164 304 C246 273 357 271 464 285 C531 294 587 315 626 340" />
+                    <path class="sulcus" d="M186 349 C263 330 359 333 448 349 C507 359 556 377 593 404" />
+                    <path class="sulcus fine" d="M212 147 C247 128 292 121 340 123 C385 124 430 133 470 154" />
+                    <path class="sulcus fine" d="M227 195 C286 167 375 168 458 190" />
+                    <path class="sulcus fine" d="M218 240 C295 213 398 218 501 245" />
+                    <path class="sulcus fine" d="M232 289 C315 268 418 276 518 304" />
+                    <path class="sulcus fine" d="M250 337 C329 325 420 336 503 360" />
+                    <path class="sulcus fine" d="M287 383 C343 376 405 383 459 399" />
+                    <path class="sulcus" d="M477 146 C533 170 579 210 603 255" />
+                    <path class="sulcus fine" d="M522 178 C559 203 588 235 606 269" />
+                  </g>
                   <path class="white-matter" d="M196 164 C270 110 406 112 520 172 C584 207 609 277 585 348 C559 423 446 459 313 452 C221 447 161 396 151 320 C144 265 156 199 196 164 Z" />
                   <path class="corpus-callosum" d="M275 187 C318 148 394 146 449 180 C473 195 482 230 466 252 C446 279 398 289 340 281 C300 276 265 253 255 224 C249 208 256 194 275 187 Z" />
+                  <path class="midline-cut" d="M369 122 C363 168 360 214 362 261 C363 314 370 368 385 425" />
                   <path class="lobe-zone frontal-zone" d="M191 165 C239 125 327 121 399 139 C389 182 361 226 319 254 C266 288 213 283 182 239 C167 214 173 187 191 165 Z" />
                   <path class="lobe-zone cingulate-zone" d="M278 178 C320 150 395 149 447 178 C450 197 440 212 421 223 C387 243 325 241 289 222 C273 213 270 193 278 178 Z" />
                   <path class="lobe-zone deep-zone" d="M290 220 C335 194 407 201 450 235 C451 289 416 332 355 340 C307 344 279 315 277 271 C276 251 281 234 290 220 Z" />
                   <path class="lobe-zone temporal-zone" d="M398 275 C439 266 486 278 516 307 C512 345 484 377 442 385 C406 390 378 365 378 327 C378 307 385 287 398 275 Z" />
                   <path class="deep-structure" d="M314 214 C340 191 391 193 423 216 C409 235 380 248 344 247 C331 244 321 232 314 214 Z" />
                   <path class="deep-structure" d="M299 232 C329 212 370 220 388 246 C373 266 346 274 319 269 C299 260 291 244 299 232 Z" />
+                  <path class="ventricle" d="M332 208 C347 198 374 198 389 208 C383 220 370 228 352 228 C342 226 334 219 332 208 Z" />
+                  <path class="ventricle" d="M341 227 C356 219 376 220 387 231 C380 241 366 247 351 246 C343 243 339 236 341 227 Z" />
                   <path class="deep-structure" d="M421 292 C450 279 482 281 510 297 C513 322 487 345 451 348 C425 344 413 322 421 292 Z" />
                   <ellipse class="deep-structure" cx="448" cy="314" rx="28" ry="20" transform="rotate(24 448 314)" />
                   <ellipse class="deep-structure" cx="394" cy="250" rx="35" ry="23" />
                   <path class="deep-structure" d="M329 244 C339 231 357 228 367 233 C357 259 356 292 369 322 C356 329 340 320 331 304 C323 287 321 259 329 244 Z" />
+                  <path class="hippocampus" d="M404 315 C425 302 451 304 469 319 C468 336 454 349 432 353 C415 352 402 341 399 327 C398 322 400 318 404 315 Z" />
+                  <path class="fiber-bundle" d="M285 212 C303 238 318 284 321 327" />
+                  <path class="fiber-bundle" d="M455 197 C431 223 418 255 414 292" />
+                  <path class="fiber-bundle" d="M330 284 C342 295 352 316 356 338" />
                   <path class="brainstem" d="M498 350 C530 352 553 366 565 392 C577 423 568 467 539 497 C518 518 491 517 482 496 C476 483 478 463 483 440 C459 424 448 399 454 375 C460 355 474 347 498 350 Z" />
                   <path class="cerebellum" d="M510 376 C553 372 589 390 603 428 C616 468 594 506 556 522 C515 540 468 523 450 487 C437 460 442 417 468 394 C480 382 495 377 510 376 Z" />
+                  <g clip-path="url(#cerebellumClip)">
+                    <path class="cerebellar-fold" d="M462 401 C494 388 528 387 563 396" />
+                    <path class="cerebellar-fold" d="M454 420 C490 407 533 409 577 422" />
+                    <path class="cerebellar-fold" d="M452 440 C493 425 541 429 587 446" />
+                    <path class="cerebellar-fold" d="M457 460 C500 445 545 450 587 466" />
+                    <path class="cerebellar-fold" d="M470 481 C507 469 545 472 578 484" />
+                    <path class="cerebellar-fold" d="M486 500 C514 493 541 494 564 501" />
+                  </g>
                   <path class="anatomy-line" d="M181 189 C229 144 331 136 429 154 C492 166 550 197 577 241" />
                   <path class="anatomy-line soft" d="M177 241 C248 203 370 194 501 214" />
                   <path class="anatomy-line" d="M178 294 C260 261 386 258 540 293" />
