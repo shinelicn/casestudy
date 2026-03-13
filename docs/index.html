@@ -6,17 +6,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <style>
           :root {
-            --bg: #f3eee6;
-            --panel: rgba(255, 251, 246, 0.92);
-            --ink: #21343b;
-            --muted: #63777c;
-            --line: rgba(33, 52, 59, 0.14);
+            --bg: #07111d;
+            --panel: rgba(9, 19, 31, 0.82);
+            --ink: #edf4fb;
+            --muted: #9fb2c3;
+            --line: rgba(194, 221, 238, 0.12);
             --teal: #0f7b76;
             --teal-soft: rgba(15, 123, 118, 0.16);
             --danger: #b54441;
             --hybrid: #926a33;
             --hybrid-soft: rgba(146, 106, 51, 0.18);
-            --shadow: 0 28px 90px rgba(58, 50, 42, 0.14);
+            --shadow: 0 42px 120px rgba(0, 0, 0, 0.42);
           }
 
           * {
@@ -27,9 +27,10 @@
             margin: 0;
             font-family: "Avenir Next", "PingFang SC", "Hiragino Sans GB", sans-serif;
             background:
-              radial-gradient(circle at top left, rgba(15, 123, 118, 0.16), transparent 34%),
-              radial-gradient(circle at 88% 14%, rgba(200, 97, 68, 0.18), transparent 28%),
-              linear-gradient(180deg, #f7f2e9 0%, #efe8dc 100%);
+              radial-gradient(circle at 18% 16%, rgba(75, 207, 255, 0.20), transparent 26%),
+              radial-gradient(circle at 84% 12%, rgba(255, 117, 95, 0.18), transparent 24%),
+              radial-gradient(circle at 50% 78%, rgba(84, 96, 255, 0.14), transparent 36%),
+              linear-gradient(180deg, #081321 0%, #09111d 46%, #050b14 100%);
             color: var(--ink);
           }
 
@@ -52,8 +53,10 @@
             gap: 8px;
             padding: 8px 12px;
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.72);
-            border: 1px solid rgba(33, 52, 59, 0.08);
+            background: rgba(11, 23, 37, 0.68);
+            border: 1px solid rgba(134, 190, 220, 0.20);
+            color: #d8ecfb;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
             font-size: 12px;
             font-weight: 800;
             letter-spacing: 0.08em;
@@ -64,6 +67,7 @@
             margin: 12px 0 10px;
             font-size: 34px;
             line-height: 1.06;
+            color: #ffffff;
           }
 
           .hero p {
@@ -81,8 +85,9 @@
           .legend-card {
             padding: 14px 16px;
             border-radius: 18px;
-            background: rgba(255, 255, 255, 0.68);
-            border: 1px solid rgba(33, 52, 59, 0.08);
+            background: linear-gradient(180deg, rgba(14, 27, 43, 0.88), rgba(8, 18, 30, 0.78));
+            border: 1px solid rgba(175, 215, 238, 0.12);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
           }
 
           .legend-card strong {
@@ -122,7 +127,7 @@
             position: relative;
             overflow: hidden;
             background: var(--panel);
-            border: 1px solid rgba(255, 255, 255, 0.52);
+            border: 1px solid rgba(187, 223, 244, 0.12);
             border-radius: 30px;
             box-shadow: var(--shadow);
             backdrop-filter: blur(12px);
@@ -132,8 +137,10 @@
             min-height: 710px;
             padding: 14px 14px 18px;
             background:
-              radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.72), transparent 32%),
-              linear-gradient(180deg, rgba(255, 252, 247, 0.98) 0%, rgba(250, 244, 237, 0.96) 100%);
+              radial-gradient(circle at 25% 18%, rgba(99, 226, 255, 0.18), transparent 22%),
+              radial-gradient(circle at 76% 16%, rgba(255, 156, 118, 0.14), transparent 24%),
+              radial-gradient(circle at 52% 78%, rgba(74, 96, 255, 0.14), transparent 28%),
+              linear-gradient(180deg, rgba(11, 22, 35, 0.96) 0%, rgba(8, 16, 26, 0.98) 100%);
           }
 
           .brain-card::before {
@@ -141,8 +148,18 @@
             position: absolute;
             inset: 0;
             background:
-              linear-gradient(135deg, rgba(255, 255, 255, 0.44), transparent 24%),
-              linear-gradient(220deg, rgba(15, 123, 118, 0.08), transparent 34%);
+              linear-gradient(135deg, rgba(255, 255, 255, 0.10), transparent 24%),
+              linear-gradient(220deg, rgba(74, 210, 255, 0.08), transparent 34%);
+            pointer-events: none;
+          }
+
+          .brain-card::after {
+            content: "";
+            position: absolute;
+            inset: 18px;
+            border-radius: 26px;
+            border: 1px solid rgba(170, 215, 241, 0.08);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
             pointer-events: none;
           }
 
@@ -159,12 +176,13 @@
             z-index: 5;
             padding: 9px 14px;
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.88);
-            border: 1px solid rgba(33, 52, 59, 0.12);
+            background: rgba(11, 23, 37, 0.72);
+            border: 1px solid rgba(146, 207, 238, 0.18);
             font-size: 12px;
-            color: #40535b;
+            color: #d8ecfb;
             font-weight: 800;
             letter-spacing: 0.04em;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
           }
 
           .brain-guide {
@@ -176,11 +194,11 @@
             gap: 6px;
             padding: 12px 14px;
             border-radius: 18px;
-            background: rgba(255, 255, 255, 0.86);
-            border: 1px solid rgba(33, 52, 59, 0.10);
-            box-shadow: 0 14px 36px rgba(58, 50, 42, 0.08);
+            background: rgba(11, 23, 37, 0.72);
+            border: 1px solid rgba(146, 207, 238, 0.16);
+            box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
             font-size: 12px;
-            color: #41555d;
+            color: #d3e5f4;
           }
 
           .brain-guide span {
@@ -204,8 +222,8 @@
           }
 
           .guide-outline {
-            background: rgba(255, 255, 255, 0.94);
-            border: 2px solid rgba(124, 81, 72, 0.42);
+            background: rgba(12, 22, 34, 0.94);
+            border: 2px solid rgba(214, 188, 168, 0.58);
           }
 
           svg {
@@ -217,19 +235,55 @@
 
           .cortex-shell {
             fill: url(#cortexGradient);
-            stroke: rgba(124, 81, 72, 0.74);
-            stroke-width: 5;
+            stroke: rgba(255, 221, 205, 0.46);
+            stroke-width: 4.4;
           }
 
           .cortex-rim {
             fill: none;
-            stroke: rgba(255, 244, 236, 0.72);
-            stroke-width: 2.8;
+            stroke: rgba(255, 249, 243, 0.66);
+            stroke-width: 2.4;
             stroke-linecap: round;
           }
 
           .cortex-shadow {
-            fill: rgba(172, 114, 95, 0.10);
+            fill: rgba(172, 114, 95, 0.14);
+          }
+
+          .brain-object {
+            filter: url(#brainDepth);
+          }
+
+          .brain-back-glow {
+            fill: url(#brainGlowGradient);
+            opacity: 0.88;
+          }
+
+          .stage-shadow {
+            fill: rgba(3, 10, 18, 0.78);
+          }
+
+          .stage-rim {
+            fill: url(#stageGlowGradient);
+            opacity: 0.92;
+          }
+
+          .shell-highlight {
+            fill: url(#shellHighlightGradient);
+            opacity: 0.78;
+            mix-blend-mode: screen;
+          }
+
+          .shell-highlight.soft {
+            opacity: 0.42;
+          }
+
+          .cortex-inner-shade {
+            fill: rgba(109, 70, 74, 0.10);
+          }
+
+          .white-matter-shadow {
+            fill: rgba(169, 118, 98, 0.10);
           }
 
           .white-matter {
@@ -242,6 +296,7 @@
             fill: rgba(250, 241, 228, 0.95);
             stroke: rgba(124, 81, 72, 0.24);
             stroke-width: 2.6;
+            filter: url(#subsurfaceSoftGlow);
           }
 
           .lobe-zone {
@@ -270,94 +325,94 @@
           }
 
           .deep-structure {
-            fill: rgba(111, 72, 78, 0.18);
-            stroke: rgba(111, 72, 78, 0.28);
+            fill: rgba(116, 79, 88, 0.30);
+            stroke: rgba(250, 218, 206, 0.18);
             stroke-width: 1.8;
           }
 
           .ventricle {
-            fill: rgba(244, 250, 255, 0.88);
-            stroke: rgba(124, 81, 72, 0.20);
+            fill: rgba(233, 246, 255, 0.92);
+            stroke: rgba(255, 235, 222, 0.14);
             stroke-width: 1.8;
           }
 
           .hippocampus {
-            fill: rgba(186, 111, 130, 0.18);
-            stroke: rgba(140, 86, 101, 0.34);
+            fill: rgba(209, 121, 148, 0.22);
+            stroke: rgba(255, 212, 224, 0.18);
             stroke-width: 1.8;
           }
 
           .fiber-bundle {
             fill: none;
-            stroke: rgba(180, 153, 112, 0.32);
+            stroke: rgba(227, 205, 157, 0.32);
             stroke-width: 2.2;
             stroke-linecap: round;
           }
 
           .midline-cut {
             fill: none;
-            stroke: rgba(124, 81, 72, 0.22);
+            stroke: rgba(255, 228, 214, 0.18);
             stroke-width: 2.4;
             stroke-dasharray: 5 6;
           }
 
           .sulcus {
             fill: none;
-            stroke: rgba(124, 81, 72, 0.24);
+            stroke: rgba(125, 73, 84, 0.36);
             stroke-width: 2.2;
             stroke-linecap: round;
             opacity: 0.95;
           }
 
           .sulcus.deep {
-            stroke: rgba(124, 81, 72, 0.32);
-            stroke-width: 3.2;
+            stroke: rgba(115, 66, 75, 0.44);
+            stroke-width: 3;
           }
 
           .sulcus.fine {
-            stroke: rgba(124, 81, 72, 0.16);
-            stroke-width: 1.5;
+            stroke: rgba(132, 80, 87, 0.22);
+            stroke-width: 1.4;
           }
 
           .cerebellum {
             fill: url(#cerebellumGradient);
-            stroke: rgba(126, 89, 82, 0.44);
-            stroke-width: 3;
+            stroke: rgba(249, 221, 206, 0.18);
+            stroke-width: 2.6;
           }
 
           .cerebellar-fold {
             fill: none;
-            stroke: rgba(126, 89, 82, 0.24);
-            stroke-width: 2;
+            stroke: rgba(130, 80, 88, 0.28);
+            stroke-width: 1.8;
             stroke-linecap: round;
           }
 
           .brainstem {
             fill: url(#stemGradient);
-            stroke: rgba(126, 89, 82, 0.38);
-            stroke-width: 3;
+            stroke: rgba(255, 228, 214, 0.18);
+            stroke-width: 2.4;
           }
 
           .anatomy-line {
             fill: none;
-            stroke: rgba(124, 81, 72, 0.26);
-            stroke-width: 3.3;
+            stroke: rgba(141, 180, 202, 0.28);
+            stroke-width: 2.6;
             stroke-linecap: round;
           }
 
           .anatomy-line.soft {
-            stroke-width: 2.6;
-            stroke: rgba(124, 81, 72, 0.18);
+            stroke-width: 2;
+            stroke: rgba(141, 180, 202, 0.16);
           }
 
           .anatomy-label {
-            fill: #475a62;
+            fill: #e4f0fa;
             font-size: 12px;
             font-weight: 800;
             letter-spacing: 0.02em;
             paint-order: stroke;
-            stroke: rgba(255, 255, 255, 0.96);
-            stroke-width: 6;
+            stroke: rgba(6, 12, 20, 0.84);
+            stroke-width: 5;
             stroke-linejoin: round;
           }
 
@@ -400,14 +455,14 @@
           }
 
           .callout-pill {
-            fill: rgba(255, 255, 255, 0.96);
+            fill: rgba(6, 15, 24, 0.78);
             stroke: var(--accent);
             stroke-width: 2;
-            filter: drop-shadow(0 6px 16px rgba(35, 43, 48, 0.10));
+            filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.28));
           }
 
           .callout-label {
-            fill: #31454d;
+            fill: #f3fbff;
             font-size: 13px;
             font-weight: 800;
             letter-spacing: 0.04em;
@@ -489,11 +544,12 @@
             max-width: 270px;
             padding: 14px 16px;
             border-radius: 20px;
-            background: rgba(24, 31, 39, 0.95);
+            background: linear-gradient(180deg, rgba(9, 18, 30, 0.94), rgba(4, 10, 17, 0.96));
             color: #fff;
             font-size: 13px;
             line-height: 1.5;
-            box-shadow: 0 20px 44px rgba(0, 0, 0, 0.24);
+            box-shadow: 0 24px 56px rgba(0, 0, 0, 0.38);
+            backdrop-filter: blur(12px);
             opacity: 0;
           }
 
@@ -542,6 +598,9 @@
 
           .info-panel {
             padding: 24px;
+            background:
+              radial-gradient(circle at 84% 10%, rgba(84, 215, 255, 0.12), transparent 26%),
+              linear-gradient(180deg, rgba(10, 21, 34, 0.90), rgba(8, 16, 26, 0.94));
           }
 
           .info-label {
@@ -585,7 +644,8 @@
             align-items: center;
             padding: 7px 11px;
             border-radius: 999px;
-            background: rgba(33, 52, 59, 0.06);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(197, 223, 239, 0.10);
             color: var(--ink);
             font-size: 12px;
             font-weight: 800;
@@ -616,8 +676,8 @@
             align-items: center;
             padding: 8px 10px;
             border-radius: 14px;
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(33, 52, 59, 0.08);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(194, 221, 238, 0.10);
             font-size: 13px;
           }
 
@@ -631,11 +691,11 @@
             margin-top: 16px;
             padding: 14px 18px;
             border-radius: 18px;
-            background: rgba(255, 255, 255, 0.62);
+            background: rgba(9, 19, 31, 0.74);
             color: var(--muted);
             font-size: 13px;
             line-height: 1.64;
-            border: 1px solid rgba(33, 52, 59, 0.08);
+            border: 1px solid rgba(194, 221, 238, 0.10);
           }
 
           @keyframes pulse {
@@ -692,7 +752,7 @@
             <div>
               <div class="eyebrow">Focused Ultrasound Demo</div>
               <h2>点击脑区，查看聚焦超声可能对应的精神科研究方向</h2>
-              <p>这张图现在改成了更高对比度的脑切面导视图，默认就能看见主要靶点轮廓、深部结构和中文解剖提示。页面里的“可能治疗”都应理解为“研究中的潜在适应证”。</p>
+              <p>这张图现在改成了更像发布会舞台上的 3D 脑切面示意图，默认就能看见主要靶点轮廓、深部结构和中文解剖提示。页面里的“可能治疗”都应理解为“研究中的潜在适应证”。</p>
             </div>
             <div class="legend">
               <div class="legend-card teal">
@@ -717,7 +777,7 @@
                   <span><i class="guide-chip"></i>彩色半透明区 = 可点击靶点</span>
                   <span><i class="guide-outline"></i>中文文字 = 解剖导视</span>
                 </div>
-                <div class="brain-caption">High-Contrast Medial Cutaway</div>
+                <div class="brain-caption">Keynote-Style 3D Cutaway</div>
                 <div class="popup-shell">
                   <div class="spotlight" id="spotlight"></div>
                   <div class="popup-card" id="popup" data-side="right"></div>
@@ -730,27 +790,61 @@
                     <clipPath id="cerebellumClip">
                       <path d="M510 376 C553 372 589 390 603 428 C616 468 594 506 556 522 C515 540 468 523 450 487 C437 460 442 417 468 394 C480 382 495 377 510 376 Z" />
                     </clipPath>
+                    <filter id="brainDepth" x="-20%" y="-20%" width="140%" height="160%">
+                      <feDropShadow dx="0" dy="26" stdDeviation="18" flood-color="#02060c" flood-opacity="0.44" />
+                      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#57d8ff" flood-opacity="0.08" />
+                    </filter>
+                    <filter id="stageBlur" x="-30%" y="-30%" width="160%" height="160%">
+                      <feGaussianBlur stdDeviation="16" />
+                    </filter>
+                    <filter id="subsurfaceSoftGlow" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="3" result="blur" />
+                      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 0.96 0 0 0  0 0 0.92 0 0  0 0 0 0.38 0" />
+                    </filter>
                     <linearGradient id="cortexGradient" x1="0%" x2="100%" y1="0%" y2="100%">
-                      <stop offset="0%" stop-color="#f2c7b3" />
-                      <stop offset="55%" stop-color="#e7b49f" />
-                      <stop offset="100%" stop-color="#d89a84" />
+                      <stop offset="0%" stop-color="#ffd9cb" />
+                      <stop offset="28%" stop-color="#f7c2b2" />
+                      <stop offset="62%" stop-color="#db8f8a" />
+                      <stop offset="100%" stop-color="#945d66" />
                     </linearGradient>
+                    <radialGradient id="brainGlowGradient" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#6be2ff" stop-opacity="0.42" />
+                      <stop offset="55%" stop-color="#63b2ff" stop-opacity="0.16" />
+                      <stop offset="100%" stop-color="#63b2ff" stop-opacity="0" />
+                    </radialGradient>
+                    <radialGradient id="shellHighlightGradient" cx="28%" cy="18%" r="74%">
+                      <stop offset="0%" stop-color="#fff6f1" stop-opacity="0.92" />
+                      <stop offset="34%" stop-color="#ffd6c8" stop-opacity="0.42" />
+                      <stop offset="100%" stop-color="#ffd6c8" stop-opacity="0" />
+                    </radialGradient>
                     <radialGradient id="whiteMatterGradient" cx="42%" cy="34%" r="78%">
                       <stop offset="0%" stop-color="#fffdf8" />
                       <stop offset="65%" stop-color="#fbf3e7" />
                       <stop offset="100%" stop-color="#efe0cd" />
                     </radialGradient>
+                    <radialGradient id="stageGlowGradient" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#6fe4ff" stop-opacity="0.58" />
+                      <stop offset="58%" stop-color="#4e84ff" stop-opacity="0.20" />
+                      <stop offset="100%" stop-color="#4e84ff" stop-opacity="0" />
+                    </radialGradient>
                     <linearGradient id="cerebellumGradient" x1="0%" x2="100%" y1="0%" y2="100%">
-                      <stop offset="0%" stop-color="#e7c2b3" />
-                      <stop offset="100%" stop-color="#d39a8a" />
+                      <stop offset="0%" stop-color="#f1cbbc" />
+                      <stop offset="100%" stop-color="#9f6772" />
                     </linearGradient>
                     <linearGradient id="stemGradient" x1="0%" x2="0%" y1="0%" y2="100%">
-                      <stop offset="0%" stop-color="#edd6c5" />
-                      <stop offset="100%" stop-color="#ccb2a0" />
+                      <stop offset="0%" stop-color="#f6ddcf" />
+                      <stop offset="100%" stop-color="#b58d87" />
                     </linearGradient>
                   </defs>
+                  <ellipse class="stage-shadow" cx="390" cy="504" rx="228" ry="36" filter="url(#stageBlur)" />
+                  <ellipse class="stage-rim" cx="391" cy="504" rx="182" ry="19" />
+                  <ellipse class="brain-back-glow" cx="388" cy="284" rx="244" ry="188" filter="url(#stageBlur)" />
+                  <g class="brain-object">
                   <path class="cortex-shadow" d="M142 270 C116 202 136 132 205 96 C278 58 401 60 505 105 C595 144 661 219 666 292 C670 351 638 424 561 469 C487 512 362 516 275 490 C220 473 180 469 149 478 C121 486 98 474 89 453 C80 433 86 406 99 378 C115 344 116 302 142 270 Z" />
                   <path class="cortex-shell" d="M142 270 C114 196 136 120 210 88 C292 51 414 58 522 104 C614 143 680 219 684 298 C687 363 653 437 570 486 C496 531 364 534 266 503 C207 485 172 479 145 489 C118 500 94 489 83 468 C70 443 77 413 95 381 C112 349 120 313 142 270 Z" />
+                  <path class="cortex-inner-shade" d="M171 264 C159 210 178 151 233 122 C306 82 413 89 503 128 C571 157 621 213 625 278 C630 337 603 394 541 430 C484 462 391 466 315 451 C254 439 210 415 186 378 C170 351 164 306 171 264 Z" />
+                  <path class="shell-highlight" d="M209 126 C288 74 411 73 518 119 C570 141 610 171 631 208 C579 184 515 170 446 166 C352 160 277 175 213 205 C188 185 186 149 209 126 Z" />
+                  <path class="shell-highlight soft" d="M182 292 C247 258 338 246 430 252 C508 256 578 275 633 310 C619 361 582 404 530 432 C469 466 379 470 299 457 C227 444 181 400 168 337 C166 321 171 305 182 292 Z" />
                   <path class="cortex-rim" d="M153 260 C131 201 149 136 216 105 C294 68 408 76 506 118 C592 154 649 223 653 292 C656 352 625 414 554 457 C485 498 369 501 286 475" />
                   <g clip-path="url(#brainClip)">
                     <path class="sulcus deep" d="M178 176 C215 150 269 136 328 139 C390 141 453 158 507 192" />
@@ -768,6 +862,7 @@
                     <path class="sulcus fine" d="M522 178 C559 203 588 235 606 269" />
                   </g>
                   <path class="white-matter" d="M196 164 C270 110 406 112 520 172 C584 207 609 277 585 348 C559 423 446 459 313 452 C221 447 161 396 151 320 C144 265 156 199 196 164 Z" />
+                  <path class="white-matter-shadow" d="M223 195 C292 149 400 150 500 200 C545 223 571 261 572 303 C572 360 528 406 457 431 C389 455 288 451 222 423 C182 406 162 370 160 321 C159 273 177 227 223 195 Z" />
                   <path class="corpus-callosum" d="M275 187 C318 148 394 146 449 180 C473 195 482 230 466 252 C446 279 398 289 340 281 C300 276 265 253 255 224 C249 208 256 194 275 187 Z" />
                   <path class="midline-cut" d="M369 122 C363 168 360 214 362 261 C363 314 370 368 385 425" />
                   <path class="lobe-zone frontal-zone" d="M191 165 C239 125 327 121 399 139 C389 182 361 226 319 254 C266 288 213 283 182 239 C167 214 173 187 191 165 Z" />
@@ -795,6 +890,7 @@
                     <path class="cerebellar-fold" d="M457 460 C500 445 545 450 587 466" />
                     <path class="cerebellar-fold" d="M470 481 C507 469 545 472 578 484" />
                     <path class="cerebellar-fold" d="M486 500 C514 493 541 494 564 501" />
+                  </g>
                   </g>
                   <path class="anatomy-line" d="M181 189 C229 144 331 136 429 154 C492 166 550 197 577 241" />
                   <path class="anatomy-line soft" d="M177 241 C248 203 370 194 501 214" />
