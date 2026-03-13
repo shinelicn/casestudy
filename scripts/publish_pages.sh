@@ -8,18 +8,37 @@ PAGES_URL="${PAGES_URL:-https://shinelicn.github.io/casestudy/}"
 DEFAULT_MESSAGE="Publish site $(date '+%Y-%m-%d %H:%M:%S')"
 MODE="publish"
 COMMIT_MESSAGE=""
+SHOULD_OPEN=0
 
 usage() {
   cat <<'EOF'
 Usage:
   ./publish [commit message]
   ./publish --preview
+  ./publish --open
   ./publish --help
 
 Modes:
   publish   Export, validate, commit, sync, and push to origin/main.
   preview   Export and validate only. No commit or push.
+
+Flags:
+  --open    Open the published page in the default browser when finished.
 EOF
+}
+
+open_url() {
+  if [ "$SHOULD_OPEN" != "1" ]; then
+    return 0
+  fi
+
+  if command -v open >/dev/null 2>&1; then
+    printf 'Opening %s\n' "$PAGES_URL"
+    open "$PAGES_URL"
+    return 0
+  fi
+
+  printf 'Cannot open browser automatically because `open` is unavailable.\n' >&2
 }
 
 parse_args() {
@@ -27,6 +46,10 @@ parse_args() {
     case "$1" in
       --preview)
         MODE="preview"
+        shift
+        ;;
+      --open)
+        SHOULD_OPEN=1
         shift
         ;;
       --help|-h)
@@ -89,6 +112,7 @@ python3 scripts/export_static_site.py
 
 if [ "$MODE" = "preview" ]; then
   printf 'Preview complete. No commit or push was performed.\n%s\n' "$PAGES_URL"
+  open_url
   exit 0
 fi
 
@@ -119,3 +143,4 @@ printf 'Pushing %s to origin/main...\n' "$CURRENT_BRANCH"
 git push origin HEAD:main
 
 printf 'Publish complete.\n%s\n' "$PAGES_URL"
+open_url

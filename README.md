@@ -59,6 +59,13 @@ https://shinelicn.github.io/casestudy/
 ./publish --preview
 ```
 
+如果希望脚本结束后自动打开线上页面，用：
+
+```bash
+./publish --open
+./publish --preview --open
+```
+
 这条命令会依次完成：
 
 - 校验 `app.py`、`modules/fus_demo.py`、`scripts/export_static_site.py`
@@ -68,7 +75,7 @@ https://shinelicn.github.io/casestudy/
 - 必要时自动 rebase
 - 把当前分支推送到 `origin/main`
 
-`--preview` 模式只执行前两步，用来在本地快速确认页面导出是否正常。
+`--preview` 模式只执行前两步，用来在本地快速确认页面导出是否正常。`--open` 会在结束后自动打开正式链接。
 
 发布脚本在：
 
