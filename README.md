@@ -33,23 +33,42 @@ http://localhost:8501
 
 ## 部署
 
-如果你要部署到线上，推荐两种方式：
+### GitHub Pages（固定域名）
 
-### 方式 1：GitHub Pages（固定域名）
-
-仓库已经预留了静态导出和 Pages workflow：
-
-- `scripts/export_static_site.py`
-- `.github/workflows/deploy-pages.yml`
-- `docs/index.html`
-
-如果仓库名仍然是 `shinelicn/casestudy`，最终正式链接会是：
+这个仓库现在已经直接发布到 GitHub Pages，正式链接是：
 
 ```text
 https://shinelicn.github.io/casestudy/
 ```
 
-### 方式 2：本地 Streamlit
+后续更新线上内容，直接在仓库根目录执行一条命令：
+
+```bash
+./publish "更新说明"
+```
+
+不传提交信息也可以，脚本会自动生成带时间戳的提交说明：
+
+```bash
+./publish
+```
+
+这条命令会依次完成：
+
+- 校验 `app.py`、`modules/fus_demo.py`、`scripts/export_static_site.py`
+- 重新生成 `docs/index.html`
+- 自动 `git add` 和 `git commit`
+- 拉取远端 `origin/main`
+- 必要时自动 rebase
+- 把当前分支推送到 `origin/main`
+
+发布脚本在：
+
+- `publish`
+- `scripts/publish_pages.sh`
+- `scripts/export_static_site.py`
+
+### 本地 Streamlit
 
 本地启动命令直接用：
 
@@ -62,8 +81,12 @@ streamlit run app.py --server.address 0.0.0.0 --server.port $PORT
 ```text
 .
 ├── app.py
+├── publish
 ├── modules/
 │   └── fus_demo.py
+├── scripts/
+│   ├── export_static_site.py
+│   └── publish_pages.sh
 ├── requirements.txt
 ├── render.yaml
 ├── Dockerfile
