@@ -53,6 +53,12 @@ https://shinelicn.github.io/casestudy/
 ./publish
 ```
 
+如果只想预演导出和校验、不提交不推送，用：
+
+```bash
+./publish --preview
+```
+
 这条命令会依次完成：
 
 - 校验 `app.py`、`modules/fus_demo.py`、`scripts/export_static_site.py`
@@ -61,6 +67,8 @@ https://shinelicn.github.io/casestudy/
 - 拉取远端 `origin/main`
 - 必要时自动 rebase
 - 把当前分支推送到 `origin/main`
+
+`--preview` 模式只执行前两步，用来在本地快速确认页面导出是否正常。
 
 发布脚本在：
 

@@ -6,7 +6,53 @@ cd "$ROOT_DIR"
 
 PAGES_URL="${PAGES_URL:-https://shinelicn.github.io/casestudy/}"
 DEFAULT_MESSAGE="Publish site $(date '+%Y-%m-%d %H:%M:%S')"
-COMMIT_MESSAGE="${1:-$DEFAULT_MESSAGE}"
+MODE="publish"
+COMMIT_MESSAGE=""
+
+usage() {
+  cat <<'EOF'
+Usage:
+  ./publish [commit message]
+  ./publish --preview
+  ./publish --help
+
+Modes:
+  publish   Export, validate, commit, sync, and push to origin/main.
+  preview   Export and validate only. No commit or push.
+EOF
+}
+
+parse_args() {
+  while [ "$#" -gt 0 ]; do
+    case "$1" in
+      --preview)
+        MODE="preview"
+        shift
+        ;;
+      --help|-h)
+        usage
+        exit 0
+        ;;
+      *)
+        if [ -n "$COMMIT_MESSAGE" ]; then
+          printf 'Only one commit message is supported.\n' >&2
+          exit 1
+        fi
+        COMMIT_MESSAGE="$1"
+        shift
+        ;;
+    esac
+  done
+
+  if [ "$MODE" = "preview" ] && [ -n "$COMMIT_MESSAGE" ]; then
+    printf 'Preview mode does not accept a commit message.\n' >&2
+    exit 1
+  fi
+
+  if [ -z "$COMMIT_MESSAGE" ]; then
+    COMMIT_MESSAGE="$DEFAULT_MESSAGE"
+  fi
+}
 
 require_cmd() {
   if ! command -v "$1" >/dev/null 2>&1; then
@@ -17,6 +63,7 @@ require_cmd() {
 
 require_cmd git
 require_cmd python3
+parse_args "$@"
 
 if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   printf 'Run this script inside the repository.\n' >&2
@@ -39,6 +86,11 @@ fi
 printf 'Exporting static site...\n'
 python3 -m py_compile app.py modules/fus_demo.py scripts/export_static_site.py
 python3 scripts/export_static_site.py
+
+if [ "$MODE" = "preview" ]; then
+  printf 'Preview complete. No commit or push was performed.\n%s\n' "$PAGES_URL"
+  exit 0
+fi
 
 printf 'Staging changes...\n'
 git add -A
