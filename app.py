@@ -19,7 +19,7 @@ def render_fus_brain_demo() -> None:
     st.warning(
         "以下内容仅用于科研 / 产品演示，不构成医疗建议，也不代表这些适应证已经获批。页面里同时包含低强度神经调控和 MRgFUS 消融，两者不是同一类治疗。"
     )
-    components.html(build_fus_brain_demo_html(FUS_BRAIN_REGIONS), height=980, scrolling=False)
+    components.html(build_fus_brain_demo_html(FUS_BRAIN_REGIONS), height=1060, scrolling=False)
 
     patient_data_count = sum(
         region["evidence_level"] not in {"健康受试者随机试验", "临床方案 / protocol"} for region in FUS_BRAIN_REGIONS

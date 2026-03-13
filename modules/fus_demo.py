@@ -278,6 +278,18 @@ FUS_REFERENCE_LINKS: list[dict[str, str]] = [
     {"label": "精神科聚焦超声路线图综述，2025", "url": "https://pubmed.ncbi.nlm.nih.gov/40854478/"},
 ]
 
+REGION_VISUALS: dict[str, dict[str, str]] = {
+    "dlpfc": {"accent": "#0f7b76", "soft": "rgba(15, 123, 118, 0.20)", "glow": "rgba(15, 123, 118, 0.34)"},
+    "scc": {"accent": "#b54441", "soft": "rgba(181, 68, 65, 0.22)", "glow": "rgba(181, 68, 65, 0.34)"},
+    "ampfc": {"accent": "#3d5bb8", "soft": "rgba(61, 91, 184, 0.20)", "glow": "rgba(61, 91, 184, 0.34)"},
+    "pcc": {"accent": "#5d74c4", "soft": "rgba(93, 116, 196, 0.20)", "glow": "rgba(93, 116, 196, 0.34)"},
+    "thalamus": {"accent": "#6b56a8", "soft": "rgba(107, 86, 168, 0.20)", "glow": "rgba(107, 86, 168, 0.34)"},
+    "caudate": {"accent": "#c66c2f", "soft": "rgba(198, 108, 47, 0.20)", "glow": "rgba(198, 108, 47, 0.34)"},
+    "nac": {"accent": "#dd8a2d", "soft": "rgba(221, 138, 45, 0.20)", "glow": "rgba(221, 138, 45, 0.34)"},
+    "alic": {"accent": "#926a33", "soft": "rgba(146, 106, 51, 0.20)", "glow": "rgba(146, 106, 51, 0.34)"},
+    "amygdala": {"accent": "#b24572", "soft": "rgba(178, 69, 114, 0.20)", "glow": "rgba(178, 69, 114, 0.34)"},
+}
+
 
 def build_fus_treatment_overview(regions: list[dict[str, object]]) -> pd.DataFrame:
     rows = [
@@ -300,33 +312,76 @@ def build_fus_treatment_overview(regions: list[dict[str, object]]) -> pd.DataFra
 def build_fus_brain_demo_html(regions: list[dict[str, object]]) -> str:
     focus_markup: list[str] = []
     trigger_markup: list[str] = []
+    visual_regions: list[dict[str, object]] = []
     for region in regions:
+        visual = REGION_VISUALS[str(region["id"])]
+        enriched_region = {**region, "accent": visual["accent"], "accent_soft": visual["soft"], "accent_glow": visual["glow"]}
+        visual_regions.append(enriched_region)
         region_type = str(region["type"])
         qx = int((int(region["x"]) + int(region["label_x"])) / 2)
         qy = int((int(region["y"]) + int(region["label_y"])) / 2)
+        focus_rx = int(region["focus_rx"])
+        focus_ry = int(region["focus_ry"])
+        inner_rx = max(10, int(focus_rx * 0.58))
+        inner_ry = max(8, int(focus_ry * 0.58))
+        label_text = str(region["short"])
+        label_width = max(88, len(label_text) * 10 + 24)
+        anchor = str(region["anchor"])
+        label_x = int(region["label_x"])
+        label_y = int(region["label_y"])
+        if anchor == "middle":
+            pill_x = int(label_x - (label_width / 2))
+        elif anchor == "end":
+            pill_x = label_x - label_width + 10
+        else:
+            pill_x = label_x - 10
+        pill_y = label_y - 18
+        pill_text_x = pill_x + int(label_width / 2)
         focus_markup.append(
             f"""
-            <ellipse
-              class="region-focus {region_type} region-trigger"
+            <g
+              class="region-layer {region_type} region-trigger"
               data-id="{region['id']}"
-              cx="{region['x']}"
-              cy="{region['y']}"
-              rx="{region['focus_rx']}"
-              ry="{region['focus_ry']}"
-              transform="rotate({region['focus_rotate']} {region['x']} {region['y']})"
-            ></ellipse>
+              style="--accent: {visual['accent']}; --accent-soft: {visual['soft']}; --accent-glow: {visual['glow']};"
+            >
+              <ellipse
+                class="region-focus"
+                cx="{region['x']}"
+                cy="{region['y']}"
+                rx="{focus_rx}"
+                ry="{focus_ry}"
+                transform="rotate({region['focus_rotate']} {region['x']} {region['y']})"
+              ></ellipse>
+              <ellipse
+                class="region-core-fill"
+                cx="{region['x']}"
+                cy="{region['y']}"
+                rx="{inner_rx}"
+                ry="{inner_ry}"
+                transform="rotate({region['focus_rotate']} {region['x']} {region['y']})"
+              ></ellipse>
+            </g>
             """
         )
         trigger_markup.append(
             f"""
-            <g class="callout-group {region_type} region-trigger" data-id="{region['id']}">
+            <g
+              class="callout-group {region_type} region-trigger"
+              data-id="{region['id']}"
+              style="--accent: {visual['accent']}; --accent-soft: {visual['soft']}; --accent-glow: {visual['glow']};"
+            >
               <path class="callout-line" d="M {region['x']} {region['y']} Q {qx} {qy} {region['label_x']} {region['label_y']}" />
-              <text class="callout-label" x="{region['label_x']}" y="{region['label_y']}" text-anchor="{region['anchor']}">{region['short']}</text>
+              <rect class="callout-pill" x="{pill_x}" y="{pill_y}" width="{label_width}" height="30" rx="15"></rect>
+              <text class="callout-label" x="{pill_text_x}" y="{label_y}" text-anchor="middle" dominant-baseline="middle">{region['short']}</text>
             </g>
-            <g class="hotspot {region_type} region-trigger" data-id="{region['id']}">
-              <circle class="pulse" cx="{region['x']}" cy="{region['y']}" r="22"></circle>
-              <circle class="ring" cx="{region['x']}" cy="{region['y']}" r="12"></circle>
-              <circle class="core" cx="{region['x']}" cy="{region['y']}" r="6"></circle>
+            <g
+              class="hotspot {region_type} region-trigger"
+              data-id="{region['id']}"
+              style="--accent: {visual['accent']}; --accent-soft: {visual['soft']}; --accent-glow: {visual['glow']};"
+            >
+              <circle class="pulse" cx="{region['x']}" cy="{region['y']}" r="26"></circle>
+              <circle class="ring" cx="{region['x']}" cy="{region['y']}" r="14"></circle>
+              <circle class="core" cx="{region['x']}" cy="{region['y']}" r="7"></circle>
             </g>
             """
         )
@@ -462,8 +517,11 @@ def build_fus_brain_demo_html(regions: list[dict[str, object]]) -> str:
           }
 
           .brain-card {
-            min-height: 640px;
-            padding: 18px;
+            min-height: 710px;
+            padding: 14px 14px 18px;
+            background:
+              radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.72), transparent 32%),
+              linear-gradient(180deg, rgba(255, 252, 247, 0.98) 0%, rgba(250, 244, 237, 0.96) 100%);
           }
 
           .brain-card::before {
@@ -487,45 +545,115 @@ def build_fus_brain_demo_html(regions: list[dict[str, object]]) -> str:
             right: 18px;
             top: 16px;
             z-index: 5;
-            padding: 8px 12px;
+            padding: 9px 14px;
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.74);
-            border: 1px solid rgba(33, 52, 59, 0.08);
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(33, 52, 59, 0.12);
             font-size: 12px;
-            color: var(--muted);
+            color: #40535b;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+          }
+
+          .brain-guide {
+            position: absolute;
+            left: 16px;
+            top: 16px;
+            z-index: 5;
+            display: grid;
+            gap: 6px;
+            padding: 12px 14px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.86);
+            border: 1px solid rgba(33, 52, 59, 0.10);
+            box-shadow: 0 14px 36px rgba(58, 50, 42, 0.08);
+            font-size: 12px;
+            color: #41555d;
+          }
+
+          .brain-guide span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            line-height: 1.4;
+          }
+
+          .guide-chip,
+          .guide-outline {
+            width: 14px;
+            height: 14px;
+            border-radius: 999px;
+            flex: 0 0 auto;
+          }
+
+          .guide-chip {
+            background: rgba(15, 123, 118, 0.20);
+            border: 2px solid rgba(15, 123, 118, 0.72);
+          }
+
+          .guide-outline {
+            background: rgba(255, 255, 255, 0.94);
+            border: 2px solid rgba(124, 81, 72, 0.42);
           }
 
           svg {
             width: 100%;
             height: 100%;
+            shape-rendering: geometricPrecision;
+            text-rendering: geometricPrecision;
           }
 
           .cortex-shell {
             fill: url(#cortexGradient);
-            stroke: rgba(124, 81, 72, 0.58);
-            stroke-width: 4;
+            stroke: rgba(124, 81, 72, 0.74);
+            stroke-width: 5;
           }
 
           .cortex-shadow {
-            fill: rgba(172, 114, 95, 0.06);
+            fill: rgba(172, 114, 95, 0.10);
           }
 
           .white-matter {
-            fill: rgba(255, 249, 240, 0.9);
-            stroke: rgba(124, 81, 72, 0.14);
-            stroke-width: 2.4;
+            fill: rgba(255, 251, 244, 0.96);
+            stroke: rgba(124, 81, 72, 0.22);
+            stroke-width: 3;
           }
 
           .corpus-callosum {
             fill: rgba(250, 241, 228, 0.95);
-            stroke: rgba(124, 81, 72, 0.16);
+            stroke: rgba(124, 81, 72, 0.24);
+            stroke-width: 2.6;
+          }
+
+          .lobe-zone {
             stroke-width: 2;
+            stroke-linejoin: round;
+          }
+
+          .frontal-zone {
+            fill: rgba(15, 123, 118, 0.08);
+            stroke: rgba(15, 123, 118, 0.18);
+          }
+
+          .cingulate-zone {
+            fill: rgba(181, 68, 65, 0.08);
+            stroke: rgba(181, 68, 65, 0.18);
+          }
+
+          .deep-zone {
+            fill: rgba(107, 86, 168, 0.07);
+            stroke: rgba(107, 86, 168, 0.16);
+          }
+
+          .temporal-zone {
+            fill: rgba(178, 69, 114, 0.08);
+            stroke: rgba(178, 69, 114, 0.16);
           }
 
           .deep-structure {
-            fill: rgba(111, 72, 78, 0.12);
-            stroke: rgba(111, 72, 78, 0.22);
-            stroke-width: 1.5;
+            fill: rgba(111, 72, 78, 0.18);
+            stroke: rgba(111, 72, 78, 0.28);
+            stroke-width: 1.8;
           }
 
           .cerebellum {
@@ -542,68 +670,92 @@ def build_fus_brain_demo_html(regions: list[dict[str, object]]) -> str:
 
           .anatomy-line {
             fill: none;
-            stroke: rgba(124, 81, 72, 0.18);
-            stroke-width: 3;
+            stroke: rgba(124, 81, 72, 0.26);
+            stroke-width: 3.3;
             stroke-linecap: round;
           }
 
           .anatomy-line.soft {
-            stroke-width: 2.2;
-            stroke: rgba(124, 81, 72, 0.12);
+            stroke-width: 2.6;
+            stroke: rgba(124, 81, 72, 0.18);
           }
 
           .anatomy-label {
-            fill: rgba(99, 119, 124, 0.82);
+            fill: #475a62;
             font-size: 12px;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            paint-order: stroke;
+            stroke: rgba(255, 255, 255, 0.96);
+            stroke-width: 6;
+            stroke-linejoin: round;
           }
 
-          .region-focus {
-            fill: rgba(15, 123, 118, 0.06);
-            stroke: rgba(15, 123, 118, 0.16);
-            stroke-width: 1.6;
-            transition: fill 220ms ease, stroke 220ms ease, opacity 220ms ease, transform 220ms ease;
+          .region-layer {
             cursor: pointer;
           }
 
-          .region-focus.neuromod.active {
-            fill: rgba(15, 123, 118, 0.22);
-            stroke: rgba(15, 123, 118, 0.72);
-            filter: drop-shadow(0 0 18px rgba(15, 123, 118, 0.34));
+          .region-focus {
+            fill: var(--accent-soft);
+            stroke: var(--accent);
+            stroke-width: 2.2;
+            opacity: 0.92;
+            transition: fill 220ms ease, stroke 220ms ease, opacity 220ms ease, transform 220ms ease;
           }
 
-          .region-focus.hybrid.active {
-            fill: rgba(146, 106, 51, 0.24);
-            stroke: rgba(146, 106, 51, 0.76);
-            filter: drop-shadow(0 0 18px rgba(146, 106, 51, 0.30));
+          .region-core-fill {
+            fill: var(--accent);
+            opacity: 0.18;
+            transition: opacity 220ms ease, transform 220ms ease;
+          }
+
+          .region-layer.active .region-focus {
+            fill: var(--accent-soft);
+            stroke: var(--accent);
+            stroke-width: 3;
+            filter: drop-shadow(0 0 18px var(--accent-glow));
+          }
+
+          .region-layer.active .region-core-fill {
+            opacity: 0.34;
           }
 
           .callout-line {
             fill: none;
-            stroke: rgba(33, 52, 59, 0.20);
+            stroke: var(--accent);
+            stroke-width: 2.6;
+            stroke-dasharray: 5 4;
+            opacity: 0.66;
+            stroke-linecap: round;
+          }
+
+          .callout-pill {
+            fill: rgba(255, 255, 255, 0.96);
+            stroke: var(--accent);
             stroke-width: 2;
-            stroke-dasharray: 4 5;
+            filter: drop-shadow(0 6px 16px rgba(35, 43, 48, 0.10));
           }
 
           .callout-label {
-            fill: var(--muted);
-            font-size: 14px;
+            fill: #31454d;
+            font-size: 13px;
             font-weight: 800;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.04em;
             cursor: pointer;
           }
 
-          .callout-group.active .callout-line,
-          .callout-group.active .callout-label {
-            stroke: var(--teal);
-            fill: var(--teal);
+          .callout-group.active .callout-line {
+            opacity: 1;
+            stroke-width: 3;
           }
 
-          .callout-group.hybrid.active .callout-line,
-          .callout-group.hybrid.active .callout-label {
-            stroke: var(--hybrid);
-            fill: var(--hybrid);
+          .callout-group.active .callout-pill {
+            fill: var(--accent);
+            filter: drop-shadow(0 8px 20px var(--accent-glow));
+          }
+
+          .callout-group.active .callout-label {
+            fill: #ffffff;
           }
 
           .hotspot {
@@ -611,39 +763,28 @@ def build_fus_brain_demo_html(regions: list[dict[str, object]]) -> str:
           }
 
           .pulse {
-            fill: rgba(15, 123, 118, 0.14);
+            fill: var(--accent-soft);
             animation: pulse 2.4s ease-in-out infinite;
             transform-origin: center;
           }
 
-          .hotspot.hybrid .pulse {
-            fill: rgba(146, 106, 51, 0.18);
-          }
-
           .ring {
             fill: rgba(255, 255, 255, 0.94);
-            stroke: var(--teal);
+            stroke: var(--accent);
             stroke-width: 3.2;
           }
 
           .core {
-            fill: var(--teal);
-          }
-
-          .hotspot.hybrid .ring {
-            stroke: var(--hybrid);
-          }
-
-          .hotspot.hybrid .core {
-            fill: var(--hybrid);
+            fill: var(--accent);
           }
 
           .hotspot.active .ring {
-            stroke-width: 4.6;
+            stroke-width: 5.2;
+            filter: drop-shadow(0 0 18px var(--accent-glow));
           }
 
           .hotspot.active .core {
-            transform: scale(1.24);
+            transform: scale(1.28);
             transform-origin: center;
           }
 
@@ -758,7 +899,7 @@ def build_fus_brain_demo_html(regions: list[dict[str, object]]) -> str:
 
           .summary {
             margin: 0 0 16px;
-            color: var(--muted);
+            color: #5d7077;
             line-height: 1.7;
           }
 
@@ -854,13 +995,19 @@ def build_fus_brain_demo_html(regions: list[dict[str, object]]) -> str:
             }
 
             .brain-card {
-              min-height: 520px;
+              min-height: 560px;
               padding: 10px;
             }
 
             .brain-caption {
               right: 12px;
               top: 12px;
+            }
+
+            .brain-guide {
+              left: 12px;
+              top: 12px;
+              max-width: calc(100% - 24px);
             }
 
             .hero h2 {
@@ -875,7 +1022,7 @@ def build_fus_brain_demo_html(regions: list[dict[str, object]]) -> str:
             <div>
               <div class="eyebrow">Focused Ultrasound Demo</div>
               <h2>点击脑区，查看聚焦超声可能对应的精神科研究方向</h2>
-              <p>这张图改成了更接近医学插画的切面风格，既展示皮层入口，也展示深部情绪、奖赏和白质通路靶点。页面里的“可能治疗”都应理解为“研究中的潜在适应证”。</p>
+              <p>这张图现在改成了更高对比度的脑切面导视图，默认就能看见主要靶点轮廓、深部结构和中文解剖提示。页面里的“可能治疗”都应理解为“研究中的潜在适应证”。</p>
             </div>
             <div class="legend">
               <div class="legend-card teal">
@@ -896,7 +1043,11 @@ def build_fus_brain_demo_html(regions: list[dict[str, object]]) -> str:
           <div class="stage">
             <div class="brain-card">
               <div class="brain-wrap">
-                <div class="brain-caption">Medial-Lateral Cutaway View</div>
+                <div class="brain-guide">
+                  <span><i class="guide-chip"></i>彩色半透明区 = 可点击靶点</span>
+                  <span><i class="guide-outline"></i>中文文字 = 解剖导视</span>
+                </div>
+                <div class="brain-caption">High-Contrast Medial Cutaway</div>
                 <div class="popup-shell">
                   <div class="spotlight" id="spotlight"></div>
                   <div class="popup-card" id="popup" data-side="right"></div>
@@ -921,6 +1072,10 @@ def build_fus_brain_demo_html(regions: list[dict[str, object]]) -> str:
                   <path class="cortex-shell" d="M142 270 C114 196 136 120 210 88 C292 51 414 58 522 104 C614 143 680 219 684 298 C687 363 653 437 570 486 C496 531 364 534 266 503 C207 485 172 479 145 489 C118 500 94 489 83 468 C70 443 77 413 95 381 C112 349 120 313 142 270 Z" />
                   <path class="white-matter" d="M196 164 C270 110 406 112 520 172 C584 207 609 277 585 348 C559 423 446 459 313 452 C221 447 161 396 151 320 C144 265 156 199 196 164 Z" />
                   <path class="corpus-callosum" d="M275 187 C318 148 394 146 449 180 C473 195 482 230 466 252 C446 279 398 289 340 281 C300 276 265 253 255 224 C249 208 256 194 275 187 Z" />
+                  <path class="lobe-zone frontal-zone" d="M191 165 C239 125 327 121 399 139 C389 182 361 226 319 254 C266 288 213 283 182 239 C167 214 173 187 191 165 Z" />
+                  <path class="lobe-zone cingulate-zone" d="M278 178 C320 150 395 149 447 178 C450 197 440 212 421 223 C387 243 325 241 289 222 C273 213 270 193 278 178 Z" />
+                  <path class="lobe-zone deep-zone" d="M290 220 C335 194 407 201 450 235 C451 289 416 332 355 340 C307 344 279 315 277 271 C276 251 281 234 290 220 Z" />
+                  <path class="lobe-zone temporal-zone" d="M398 275 C439 266 486 278 516 307 C512 345 484 377 442 385 C406 390 378 365 378 327 C378 307 385 287 398 275 Z" />
                   <path class="deep-structure" d="M314 214 C340 191 391 193 423 216 C409 235 380 248 344 247 C331 244 321 232 314 214 Z" />
                   <path class="deep-structure" d="M299 232 C329 212 370 220 388 246 C373 266 346 274 319 269 C299 260 291 244 299 232 Z" />
                   <path class="deep-structure" d="M421 292 C450 279 482 281 510 297 C513 322 487 345 451 348 C425 344 413 322 421 292 Z" />
@@ -937,9 +1092,13 @@ def build_fus_brain_demo_html(regions: list[dict[str, object]]) -> str:
                   <path class="anatomy-line soft" d="M468 384 C494 405 514 441 519 485" />
                   <path class="anatomy-line soft" d="M500 401 C528 419 545 451 547 486" />
                   <path class="anatomy-line soft" d="M480 369 C509 386 531 416 535 447" />
-                  <text class="anatomy-label" x="152" y="158">frontal</text>
-                  <text class="anatomy-label" x="564" y="176">occipital</text>
-                  <text class="anatomy-label" x="525" y="522">cerebellum</text>
+                  <text class="anatomy-label" x="148" y="156">额叶皮层</text>
+                  <text class="anatomy-label" x="286" y="201">扣带回</text>
+                  <text class="anatomy-label" x="282" y="255">纹状体</text>
+                  <text class="anatomy-label" x="326" y="288">内囊前肢</text>
+                  <text class="anatomy-label" x="386" y="249">丘脑</text>
+                  <text class="anatomy-label" x="438" y="320">杏仁核</text>
+                  <text class="anatomy-label" x="526" y="518">小脑</text>
                   __FOCUS_MARKUP__
                   __TRIGGER_MARKUP__
                 </svg>
@@ -1021,6 +1180,7 @@ def build_fus_brain_demo_html(regions: list[dict[str, object]]) -> str:
             popup.style.top = `${(region.y / 560) * 100}%`;
             popup.dataset.side = region.popup_side;
             popup.className = "popup-card";
+            popup.style.border = `1px solid ${region.accent}`;
             popup.offsetWidth;
             popup.classList.add("visible");
 
@@ -1039,7 +1199,7 @@ def build_fus_brain_demo_html(regions: list[dict[str, object]]) -> str:
             document.querySelectorAll(".callout-group").forEach((node) => {
               node.classList.toggle("active", node.dataset.id === region.id);
             });
-            document.querySelectorAll(".region-focus").forEach((node) => {
+            document.querySelectorAll(".region-layer").forEach((node) => {
               node.classList.toggle("active", node.dataset.id === region.id);
             });
           }
@@ -1061,5 +1221,5 @@ def build_fus_brain_demo_html(regions: list[dict[str, object]]) -> str:
     return (
         html.replace("__FOCUS_MARKUP__", "".join(focus_markup))
         .replace("__TRIGGER_MARKUP__", "".join(trigger_markup))
-        .replace("__REGIONS_JSON__", json.dumps(regions, ensure_ascii=False))
+        .replace("__REGIONS_JSON__", json.dumps(visual_regions, ensure_ascii=False))
     )
